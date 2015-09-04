@@ -546,7 +546,7 @@ var betStore = new Store('bet', {
       self.state.wager.num = n;
     } else {
       // wagerString is valid
-      if (n > 1000000){
+      if (n > 1100000){
         self.state.wager.error = 'CANNOT_AFFORD_WAGER';
         self.state.wager.num = n;
       } else {
