@@ -22,7 +22,7 @@ var config = {
   // - Configure the house edge (default is 1%)
   //   Must be between 0.0 (0%) and 1.0 (100%)
   house_edge: 0.009,
-  chat_buffer_size: 50,
+  chat_buffer_size: 75,
   // - The amount of bets to show on screen in each tab
   bet_buffer_size: 50
 };
@@ -258,7 +258,7 @@ var MoneyPot = (function() {
   };
 
   // gRecaptchaResponse is string response from google server
-  // `callbacks.success` signature  is fn({ claim_id: Int, amoutn: Satoshis })
+  // `callbacks.success` signature	is fn({ claim_id: Int, amoutn: Satoshis })
   o.claimFaucet = function(gRecaptchaResponse, callbacks) {
     console.log('Hitting POST /claim-faucet');
     var endpoint = '/claim-faucet';
@@ -550,9 +550,9 @@ var betStore = new Store('bet', {
         self.state.wager.error = 'CANNOT_AFFORD_WAGER';
         self.state.wager.num = n;
       } else {
-        self.state.wager.error = null;
-        self.state.wager.str = n.toString();
-        self.state.wager.num = n;
+	    self.state.wager.error = null;
+	    self.state.wager.str = n.toString();
+	    self.state.wager.num = n;
         if (!betStore.state.automaticToggle) {
           self.state.profitGained.num = self.state.wager.num;
         }
@@ -725,7 +725,7 @@ var betStore = new Store('bet', {
         self.state.NumberOfBetLimit = _.merge({}, self.state.automaticMultiplierWager, limit);
         self.emitter.emit('change', self.state);
     });
-
+  
   Dispatcher.registerCallback('UPDATE_MULTIPLIER', function(newMult) {
     self.state.multiplier = _.merge({}, self.state.multiplier, newMult);
     self.emitter.emit('change', self.state);
@@ -1138,7 +1138,7 @@ var ChatUserList = React.createClass({
   render: function() {
     return (
       el.div(
-        {className: 'panel panel-default cul'},
+        {className: 'panel panel-default'},
         el.div(
           {className: 'panel-heading'},
           'UserList'
@@ -1207,7 +1207,7 @@ var ChatBox = React.createClass({
     return el.div(
       {id: 'chat-box'},
       el.div(
-        {className: 'panel panel-default mcb'},
+        {className: 'panel panel-default'},
         el.div(
           {className: 'panel-body'},
           el.ul(
@@ -1672,8 +1672,7 @@ var BetBoxButton = React.createClass({
         'INVALID_MULTIPLIER': 'Invalid multiplier',
         'MULTIPLIER_TOO_PRECISE': 'Multiplier too precise',
         'MULTIPLIER_TOO_HIGH': 'Multiplier too high',
-        'MULTIPLIER_TOO_LOW': 'Multiplier too low',
-
+        'MULTIPLIER_TOO_LOW': 'Multiplier too low'
       };
 
       innerNode = el.button(
@@ -1795,7 +1794,7 @@ var BetBox = React.createClass({
     return el.div(
       null,
       el.div(
-        {className: 'panel panel-default mbb'},
+        {className: 'panel panel-default'},
         el.div(
           {className: 'panel-body'},
           el.div(
