@@ -893,7 +893,7 @@ var UserBox = React.createClass({
     var windowName = 'manage-auth';
     var windowOpts = [
       'width=420',
-      'height=350',
+      'height=540',
       'left=100',
       'top=100'
     ].join(',');
