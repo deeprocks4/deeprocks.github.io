@@ -30,7 +30,9 @@ var config = {
 ////////////////////////////////////////////////////////////
 // You shouldn't have to edit anything below this line
 ////////////////////////////////////////////////////////////
-
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 // Validate the configured house edge
 (function() {
   var errString;
@@ -529,16 +531,20 @@ var betStore = new Store('bet', {
   Dispatcher.registerCallback('UPDATE_WAGER', function(newWager) {
     self.state.wager = _.merge({}, self.state.wager, newWager);
 
-    var n = parseInt(self.state.wager.str, 10);
+    //var n = parseInt(self.state.wager.str, 10);
+	//var n = parseInt("1.3", 10);
+	var n = self.state.wager.str;
 
     // If n is a number, ensure it's at least 1 bit
-    if (isFinite(n)) {
-      n = Math.max(n, 1);
+    //if (isFinite(n)) {
+      //n = Math.max(n, 1);
       self.state.wager.str = n.toString();
-    }
+    //}
+	
 
     // Ensure wagerString is a number
-    if (isNaN(n) || /[^\d]/.test(n.toString())) {
+    //if (isNaN(n) || /[^\d]/.test(n.toString())) {
+	if (n < 1) {
       self.state.wager.error = 'INVALID_WAGER';
     // Ensure user can afford balance
     } else if (n * 100 > worldStore.state.user.balance) {
@@ -558,6 +564,13 @@ var betStore = new Store('bet', {
         }
       }
     }
+	if (isNumeric(n) && (n < 0.1)){
+		self.state.wager.error = 'INVALID_WAGER';
+	} else {
+	    self.state.wager.error = null; // z
+	    self.state.wager.str = n.toString(); // z
+	    self.state.wager.num = n; // z
+	}
 
     self.emitter.emit('change', self.state);
   });
@@ -578,16 +591,18 @@ var betStore = new Store('bet', {
   Dispatcher.registerCallback('UPDATE_AUTOMATIC_WAGER', function(newWager) {
         self.state.automaticWager = _.merge({}, self.state.automaticWager, newWager);
         
-        var n = parseInt(self.state.automaticWager.str, 10);
+        //var n = parseInt(self.state.automaticWager.str, 10);
+		var n = self.state.automaticWager.str;
         
         // If n is a number, ensure it's at least 1 bit
-        if (isFinite(n)) {
-          n = Math.max(n, 1);
+        //if (isFinite(n)) {
+          //n = Math.max(n, 1);
           self.state.automaticWager.str = n.toString();
-        }
+        //}
         
         // Ensure wagerString is a number
-        if (isNaN(n) || /[^\d]/.test(n.toString())) {
+        //if (isNaN(n) || /[^\d]/.test(n.toString())) {
+		if (n < 1) {
           self.state.automaticWager.error = 'INVALID_WAGER';
         // Ensure user can afford balance
         } else if (n * 100 > worldStore.state.user.balance) {
@@ -599,6 +614,9 @@ var betStore = new Store('bet', {
           self.state.automaticWager.str = n.toString();
           self.state.automaticWager.num = n;
         }
+          self.state.automaticWager.error = null;
+          self.state.automaticWager.str = n.toString();
+          self.state.automaticWager.num = n;
         
         self.emitter.emit('change', self.state);
     });
@@ -661,7 +679,8 @@ var betStore = new Store('bet', {
         var balanceQuantity = worldStore.state.user.balance / 100;
         if(balanceQuantity > profitQuantity){
             betStore.state.profitGained.num = profitQuantity;
-            betStore.state.profitGained.num = Number(betStore.state.profitGained.num.toFixed(0));
+            //betStore.state.profitGained.num = Number(betStore.state.profitGained.num.toFixed(0));
+			betStore.state.profitGained.num = Number(betStore.state.profitGained.num);
         }else{
             Dispatcher.sendAction("STOP_ROLL");
         }
@@ -682,7 +701,8 @@ var betStore = new Store('bet', {
         self.emitter.emit('change', self.state);
     });
     Dispatcher.registerCallback("SET_MULTI_ON_LOSE", function(multiOnLose){
-        var n = parseInt(multiOnLose, 10);
+        //var n = parseInt(multiOnLose, 10);
+		var n = multiOnLose;
         if (isNaN(n) || /[^\d]/.test(n.toString())) {
           betStore.state.multiOnLose.str = '';
           betStore.state.multiOnLose.error = 'INVALID_AUTO_MULTIPLIER';
@@ -690,6 +710,8 @@ var betStore = new Store('bet', {
           betStore.state.multiOnLose.error = null;
           betStore.state.multiOnLose.str = n;
         }
+          betStore.state.multiOnLose.error = null;
+          betStore.state.multiOnLose.str = n;
         self.emitter.emit('change', self.state);
     });
     Dispatcher.registerCallback("SET_STOP_MAX_BALANCE", function(stopMaxBalance){
@@ -893,7 +915,7 @@ var UserBox = React.createClass({
     var windowName = 'manage-auth';
     var windowOpts = [
       'width=420',
-      'height=540',
+      'height=550',
       'left=100',
       'top=100'
     ].join(',');
@@ -1474,7 +1496,10 @@ var BetBoxWager = React.createClass({
     Dispatcher.sendAction('UPDATE_WAGER', { str: str });
   },
   _onHalveWager: function() {
-    var newWager = Math.round(betStore.state.wager.num / 2);
+    //var newWager = Math.round(betStore.state.wager.num / 2);
+	if (betStore.state.wager.num != 0){
+		var newWager = (betStore.state.wager.num / 2);
+	}
     Dispatcher.sendAction('UPDATE_WAGER', { str: newWager.toString() });
   },
   _onDoubleWager: function() {
@@ -3072,7 +3097,8 @@ $(document).on('keydown', function(e) {
       });
       break;
     case X:  // Decrease wager
-      var downWager = Math.floor(betStore.state.wager.num / 2);
+      //var downWager = Math.floor(betStore.state.wager.num / 2);
+	  var downWager = betStore.state.wager.num / 2;
       Dispatcher.sendAction('UPDATE_WAGER', {
         num: downWager,
         str: downWager.toString()
