@@ -6,7 +6,7 @@ var config = {
   // - Your app's id on moneypot.com
   app_id: 497,                             // <----------------------------- EDIT ME!
   // - Displayed in the navbar
-  app_name: '★Invest Dice★฿ ~ 0.9% house edge' ,
+  app_name: '★Invest Dice★฿ ~ 1% House edge' ,
   // - For your faucet to work, you must register your site at Recaptcha
   // - https://www.google.com/recaptcha/intro/index.html
   recaptcha_sitekey: '6LfaxAsTAAAAAB-08wFZ6KVZQ9ez_wS7anE0wa1D',  // <----- EDIT ME!
@@ -21,7 +21,7 @@ var config = {
   force_https_redirect: !isRunningLocally(),
   // - Configure the house edge (default is 1%)
   //   Must be between 0.0 (0%) and 1.0 (100%)
-  house_edge: 0.009,
+  house_edge: 0.01,
   chat_buffer_size: 75,
   // - The amount of bets to show on screen in each tab
   bet_buffer_size: 50
