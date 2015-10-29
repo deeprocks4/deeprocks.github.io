@@ -119,7 +119,7 @@ helpers.roleToLabelElement = function(role) {
     case 'OWNER':
       return el.span({className: 'label label-primary'}, '★Owner★');
     default:
-      return '';
+      return el.span({className: 'label label-primary'}, '☆');
   }
 };
 
