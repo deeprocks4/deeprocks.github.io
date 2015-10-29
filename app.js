@@ -115,7 +115,7 @@ helpers.roleToLabelElement = function(role) {
     case 'ADMIN':
       return el.span({className: 'label label-danger'}, 'MP Staff');
     case 'MOD':
-      return el.span({className: 'label label-info'}, '☆Mod☆');
+      return el.span({className: 'label label-info'}, '☆V.I.P☆');
     case 'OWNER':
       return el.span({className: 'label label-primary'}, '★Owner★');
     default:
