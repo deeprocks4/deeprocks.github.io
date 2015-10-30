@@ -737,7 +737,8 @@ var betStore = new Store('bet', {
         betStore.state.stopMinBalance = n;
       }
       betStore.state.stopMinBalance.error = null;
-      self.emitter.emit('change', self.state);
+      betStore.state.stopMinBalance = n;
+    self.emitter.emit('change', self.state);
     });
     
     Dispatcher.registerCallback("STOP_ROLL", function(){
