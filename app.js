@@ -2492,8 +2492,8 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10(bet.profit*0.00000001, -2) :
-                  helpers.round10(bet.profit*0.00000001, -2),
+                  '+' + helpers.round10(bet.profit/100, -2) :
+                  helpers.round10(bet.profit/100, -2),
                 ' Bits'
               )
             );
@@ -2686,7 +2686,7 @@ var BetRow = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10(bet.wager*0.00000001, -2),
+        helpers.round10(bet.wager/100, -2),
         ' Bits'
       ),
       // Target
@@ -2796,9 +2796,9 @@ var BetRow = React.createClass({
           }
         },
         bet.profit > 0 ?
-          '+' + helpers.round10(bet.profit*0.00000001, -2) :
-          helpers.round10(bet.profit*0.00000001, -2),
-        ' BTC'
+          '+' + helpers.round10(bet.profit/100, -2) :
+          helpers.round10(bet.profit/100, -2),
+        ' Bits'
       )
     );
   }
