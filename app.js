@@ -469,8 +469,8 @@ var chatStore = new Store('chat', {
 var betStore = new Store('bet', {
   nextHash: undefined,
   wager: {
-    str: '1',
-    num: 1,
+    str: '0.000001',
+    num: 0.000001,
     error: undefined
   },
   multiplier: {
@@ -480,8 +480,8 @@ var betStore = new Store('bet', {
   },
   hotkeysEnabled: false,
   automaticWager: {
-      str: '1',
-      num: 1,
+      str: '0.000001',
+      num: 0.000001,
       error: undefined
   },
   automaticMultiplierWager: {
