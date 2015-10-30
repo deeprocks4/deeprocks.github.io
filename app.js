@@ -2472,7 +2472,7 @@ var MyBetsTabContent = React.createClass({
               // wager
               el.td(
                 null,
-                helpers.round10(bet.wager* 0.00000001, -2),
+                helpers.round10(bet.wager* 0.00000001, -8),
                 ' bits'
               ),
               // target
