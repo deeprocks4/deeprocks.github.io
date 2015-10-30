@@ -547,7 +547,7 @@ var betStore = new Store('bet', {
 	if (n < 0.000001) {
       self.state.wager.error = 'INVALID_WAGER';
     // Ensure user can afford balance
-    } else if (n * 100 > worldStore.state.user.balance) {
+    } else if (n / 0.00000001 > worldStore.state.user.balance) {
       self.state.wager.error = 'CANNOT_AFFORD_WAGER';
       self.state.wager.num = n;
     } else {
@@ -605,7 +605,7 @@ var betStore = new Store('bet', {
 		if (n < 1) {
           self.state.automaticWager.error = 'INVALID_WAGER';
         // Ensure user can afford balance
-        } else if (n * 100 > worldStore.state.user.balance) {
+        } else if (n / 0.00000001 > worldStore.state.user.balance) {
           self.state.automaticWager.error = 'CANNOT_AFFORD_WAGER';
           self.state.automaticWager.num = n;
         } else {
@@ -2008,7 +2008,7 @@ var ToggleAutomaticRoll = React.createClass({
                   var hash = betStore.state.nextHash;
                   console.assert(typeof hash === 'string');
                   
-                  var wagerSatoshis = betStore.state.profitGained.num * 100;
+                  var wagerSatoshis = betStore.state.profitGained.num / 0.00000001;
                   var multiplier = betStore.state.multiplier.num;
                   var payoutSatoshis = wagerSatoshis * multiplier;
                   
