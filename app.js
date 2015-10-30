@@ -490,7 +490,7 @@ var betStore = new Store('bet', {
       error: undefined
   },
   multiOnLose: {
-    str: '1',
+    str: '2',
     error: undefined
   },
   clientSeed: {
