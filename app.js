@@ -1546,7 +1546,7 @@ var BetBoxWager = React.createClass({
           style: style1,
           onChange: this._onWagerChange,
           disabled: !!worldStore.state.isLoading,
-          placeholder: 'Bits'
+          placeholder: 'BTC'
         }
       ),
       el.div(
@@ -2305,7 +2305,7 @@ var ToggleAutomaticRoll = React.createClass({
                                     ),
                                     el.span(
                                         {className: 'input-group-addon'},
-                                        'Bits'
+                                        'BTC'
                                     )
                               ),
                               el.div({className: 'col-lg-3 col-md-3 col-sm-3 col-xs-3'}, ' ')
@@ -2330,7 +2330,7 @@ var ToggleAutomaticRoll = React.createClass({
                                     ),
                                     el.span(
                                         {className: 'input-group-addon'},
-                                        'Bits'
+                                        'BTC'
                                     )
                               ),
                               el.div({className: 'col-lg-3 col-md-3 col-sm-3 col-xs-3'}, ' ')
@@ -2481,7 +2481,7 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 null,
                 helpers.round10(bet.wager* 0.00000001, -8),
-                ' bits'
+                ' BTC'
               ),
               // target
               el.td(
