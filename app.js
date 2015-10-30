@@ -715,8 +715,7 @@ var betStore = new Store('bet', {
         self.emitter.emit('change', self.state);
     });
     Dispatcher.registerCallback("SET_STOP_MAX_BALANCE", function(stopMaxBalance){
-      //var n = parseInt(stopMaxBalance, 10);
-     		var n = stopMaxBalance;
+      var n = parseInt(stopMaxBalance, 10);
       if (isNaN(n) || /[^\d]/.test(n.toString())) {
         betStore.state.stopMaxBalance = '';
       }else {
