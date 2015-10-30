@@ -719,6 +719,7 @@ var betStore = new Store('bet', {
       if (isNaN(n) || /[^\d]/.test(n.toString())) {
         betStore.state.stopMaxBalance = '';
       }else {
+      	betStore.state.stopMaxBalance.error = null;
         betStore.state.stopMaxBalance = n;
       }
       self.emitter.emit('change', self.state);
