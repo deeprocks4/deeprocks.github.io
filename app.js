@@ -1519,7 +1519,7 @@ var BetBoxWager = React.createClass({
     var balanceBits;
     if (worldStore.state.user) {
       balanceBits = worldStore.state.user.balance * .00000001;
-      balanceBits = Math.floor(balanceBits * 100000) / 100000;
+      balanceBits = Math.floor(balanceBits * 1000000) / 1000000;
     } else {
       balanceBits = 42000;
     }
