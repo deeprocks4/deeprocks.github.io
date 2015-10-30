@@ -722,7 +722,9 @@ var betStore = new Store('bet', {
       	betStore.state.stopMaxBalance.error = null;
         betStore.state.stopMaxBalance = n;
       }
-      self.emitter.emit('change', self.state);
+      betStore.state.stopMaxBalance.error = null;
+      betStore.state.stopMaxBalance = n;
+    self.emitter.emit('change', self.state);
     });
     Dispatcher.registerCallback("SET_STOP_MIN_BALANCE", function(stopMinBalance){
       var n = parseInt(stopMinBalance, 10);
