@@ -728,12 +728,15 @@ var betStore = new Store('bet', {
     self.emitter.emit('change', self.state);
     });
     Dispatcher.registerCallback("SET_STOP_MIN_BALANCE", function(stopMinBalance){
-      var n = parseInt(stopMinBalance, 10);
+      //var n = parseInt(stopMinBalance, 10);
+      		var n = stopMinBalance;
       if (isNaN(n) || /[^\d]/.test(n.toString())) {
         betStore.state.stopMinBalance = '';
       }else {
+      	betStore.state.stopMinBalance.error = null;
         betStore.state.stopMinBalance = n;
       }
+      betStore.state.stopMinBalance.error = null;
       self.emitter.emit('change', self.state);
     });
     
