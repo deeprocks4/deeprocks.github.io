@@ -27,12 +27,6 @@ var config = {
   bet_buffer_size: 50
 };
 
-  // Decimal floor
-  if (!Math.floor10) {
-    Math.floor10 = function(value, exp) {
-      return decimalAdjust('floor', value, exp);
-    };
-  }
 ////////////////////////////////////////////////////////////
 // You shouldn't have to edit anything below this line
 ////////////////////////////////////////////////////////////
@@ -1525,7 +1519,7 @@ var BetBoxWager = React.createClass({
     var balanceBits;
     if (worldStore.state.user) {
       balanceBits = worldStore.state.user.balance * .00000001;
-      balanceBits = Math.floor10(balanceBits, -6);
+      balanceBits = Math.floor(balanceBits * 100000) / 100000
     } else {
       balanceBits = 42000;
     }
