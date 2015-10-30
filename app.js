@@ -630,7 +630,7 @@ var betStore = new Store('bet', {
     Dispatcher.registerCallback('AUTOMATE_TOGGLE_ROLL', function() {
         console.log('[BetStore] received AUTOMATE_TOGGLE_ROLL');
         betStore.state.automaticToggle = true;
-        var balance = worldStore.state.user.balance / 100;
+        var balance = worldStore.state.user.balance * 0.00000001;
         var stop = false;
         if(betStore.state.checkBoxNumberOfBet === 'true' && (betStore.state.betCounter + 1) == self.state.NumberOfBetLimit.str){
             stop = true;
@@ -676,7 +676,7 @@ var betStore = new Store('bet', {
     
     Dispatcher.registerCallback("AUGMENT_PROFIT", function(multi){
         var profitQuantity = betStore.state.profitGained.num * Number(multi);
-        var balanceQuantity = worldStore.state.user.balance / 100;
+        var balanceQuantity = worldStore.state.user.balance * 0.00000001;
         if(balanceQuantity > profitQuantity){
             betStore.state.profitGained.num = profitQuantity;
             //betStore.state.profitGained.num = Number(betStore.state.profitGained.num.toFixed(0));
@@ -960,12 +960,12 @@ var UserBox = React.createClass({
             className: 'navbar-text',
             style: {marginRight: '5px'}
           },
-          (worldStore.state.user.balance / 100) + ' bits',
+          (worldStore.state.user.balance * 0.00000001) + ' BTC',
           !worldStore.state.user.unconfirmed_balance ?
            '' :
            el.span(
              {style: { color: '#e67e22'}},
-             ' + ' + (worldStore.state.user.unconfirmed_balance / 100) + ' bits pending'
+             ' + ' + (worldStore.state.user.unconfirmed_balance * 0.00000001) + ' BTC pending'
            )
         ),
         // Refresh button
@@ -1510,7 +1510,7 @@ var BetBoxWager = React.createClass({
     // If user is logged in, use their balance as max wager
     var balanceBits;
     if (worldStore.state.user) {
-      balanceBits = Math.floor(worldStore.state.user.balance / 100);
+      balanceBits = Math.floor(worldStore.state.user.balance * 0.00000001);
     } else {
       balanceBits = 42000;
     }
@@ -2472,7 +2472,7 @@ var MyBetsTabContent = React.createClass({
               // wager
               el.td(
                 null,
-                helpers.round10(bet.wager/100, -2),
+                helpers.round10(bet.wager* 0.00000001, -2),
                 ' bits'
               ),
               // target
@@ -2492,9 +2492,9 @@ var MyBetsTabContent = React.createClass({
               el.td(
                 {style: {color: bet.profit > 0 ? 'green' : 'red'}},
                 bet.profit > 0 ?
-                  '+' + helpers.round10(bet.profit/100, -2) :
-                  helpers.round10(bet.profit/100, -2),
-                ' bits'
+                  '+' + helpers.round10(bet.profit*0.00000001, -2) :
+                  helpers.round10(bet.profit*0.00000001, -2),
+                ' Bits'
               )
             );
           }).reverse()
@@ -2620,7 +2620,7 @@ var FaucetTabContent = React.createClass({
     case 'SUCCESSFULLY_CLAIMED':
       innerNode = el.div(
         null,
-        'Successfully claimed ' + this.state.claimAmount/100 + ' bits.' +
+        'Successfully claimed ' + this.state.claimAmount*0.00000001 + ' BTC.' +
           // TODO: What's the real interval?
           ' You can claim again in 5 minutes.'
       );
@@ -2686,8 +2686,8 @@ var BetRow = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10(bet.wager/100, -2),
-        ' bits'
+        helpers.round10(bet.wager*0.00000001, -2),
+        ' Bits'
       ),
       // Target
       el.td(
@@ -2796,9 +2796,9 @@ var BetRow = React.createClass({
           }
         },
         bet.profit > 0 ?
-          '+' + helpers.round10(bet.profit/100, -2) :
-          helpers.round10(bet.profit/100, -2),
-        ' bits'
+          '+' + helpers.round10(bet.profit*0.00000001, -2) :
+          helpers.round10(bet.profit*0.00000001, -2),
+        ' BTC'
       )
     );
   }
