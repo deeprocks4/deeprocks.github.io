@@ -519,7 +519,7 @@ var betStore = new Store('bet', {
     num: 1,
     error: undefined
   },
-  betVelocity: 200
+  betVelocity: 25
 }, function() {
   var self = this;
 
