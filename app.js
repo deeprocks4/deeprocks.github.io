@@ -3036,16 +3036,22 @@ function connectToChatServer() {
     });
 
     socket.on('new_bet', function(bet) {
-      console.log('[socket] New bet:', bet);
 
-      // Ignore bets that aren't of kind "simple_dice".
-      if (bet.kind !== 'simple_dice') {
-        console.log('[weird] received bet from socket that was NOT a simple_dice bet');
-        return;
-      }
+  // ignore bets that wager < 0.005 btc (500,000 satoshi)
+  if (bet.wager < 500000) {
+    return;
+  }
 
-      Dispatcher.sendAction('NEW_ALL_BET', bet);
-    });
+  console.log('[socket] New bet:', bet);
+
+  // Ignore bets that aren't of kind "simple_dice".
+  if (bet.kind !== 'simple_dice') {
+    console.log('[weird] received bet from socket that was NOT a simple_dice bet');
+    return;
+  }
+
+  Dispatcher.sendAction('NEW_ALL_BET', bet);
+  });
 
     // Received when your client doesn't comply with chat-server api
     socket.on('client_error', function(text) {
