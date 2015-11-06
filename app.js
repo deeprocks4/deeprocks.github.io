@@ -6,7 +6,7 @@ var config = {
   // - Your app's id on moneypot.com
   app_id: 497,                             // <----------------------------- EDIT ME!
   // - Displayed in the navbar
-  app_name: '★Invest Dice★฿ ~ 1% House edge' ,
+  app_name: '★Invest Dice★฿ ~ 1.0% House edge' ,
   // - For your faucet to work, you must register your site at Recaptcha
   // - https://www.google.com/recaptcha/intro/index.html
   recaptcha_sitekey: '6LfaxAsTAAAAAB-08wFZ6KVZQ9ez_wS7anE0wa1D',  // <----- EDIT ME!
@@ -279,7 +279,10 @@ var MoneyPot = (function() {
     var endpoint = '/bets/simple-dice';
     makeMPRequest('POST', bodyParams, endpoint, callbacks);
   };
-
+  o.tip = function(bodyParams, callbacks) {
+        var endpoint = '/tip';
+        makeMPRequest('POST', bodyParams, endpoint, callbacks);
+};
   return o;
 })();
 
@@ -455,6 +458,41 @@ var chatStore = new Store('chat', {
 
   // Message is { text: String }
   Dispatcher.registerCallback('SEND_MESSAGE', function(text) {
+  	if (text.substring(0, 4) == "/tip") {
+  		// TIP CODE HERE
+		var tipres = text.split(" ");
+		var tipamount = Math.round(parseFloat(tipres[2]) * 1e8);
+		var tipto = tipres[1];
+		// send tip to moneypot
+		
+		
+	var params = {
+        uname: tipto,
+        amount: tipamount
+      };
+
+	  MoneyPot.tip(params, {
+                  success: function(tip) {
+                  Dispatcher.sendAction('UPDATE_USER', {
+            balance: worldStore.state.user.balance - tipamount
+          });
+                   alert("Successfully sent "+tipres[2]+"BTC to "+tipto); console.log('Successfully made tip.');
+                  },
+                  error: function(xhr) {
+                    console.log('Error' + tipto + '|' + tipamount + '');
+                    if (xhr.responseJSON && xhr.responseJSON) {
+                      alert(xhr.responseJSON.error);
+                    } else {
+                      alert('Internal Error');
+                    }
+                  }
+
+                  })
+		
+		
+		
+  		
+  	} else {
     console.log('[ChatStore] received SEND_MESSAGE');
     self.state.waitingForServer = true;
     self.emitter.emit('change', self.state);
@@ -463,6 +501,7 @@ var chatStore = new Store('chat', {
         alert('Chat Error: ' + err);
       }
     });
+	}
   });
 });
 
@@ -3136,3 +3175,6 @@ window.addEventListener('message', function(event) {
     Dispatcher.sendAction('START_REFRESHING_USER');
   }
 }, false);
+window.setInterval(function(){
+          Dispatcher.sendAction('START_REFRESHING_USER');
+ }, 300000);
