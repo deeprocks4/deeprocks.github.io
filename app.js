@@ -1709,9 +1709,9 @@ var BetBoxButton = React.createClass({
         error: function(xhr) {
           console.log('Error');
           if (xhr.responseJSON && xhr.responseJSON) {
-            alert(xhr.responseJSON.error);
+            //alert(xhr.responseJSON.error);
           } else {
-            alert('Internal Error');
+            // alert('Internal Error');
           }
         },
         complete: function() {
@@ -2103,9 +2103,9 @@ var ToggleAutomaticRoll = React.createClass({
                   error: function(xhr) {
                     console.log('Error');
                     if (xhr.responseJSON && xhr.responseJSON) {
-                      alert(xhr.responseJSON.error);
+                      //alert(xhr.responseJSON.error);
                     } else {
-                      alert('Internal Error');
+                      // alert('Internal Error');
                     }
                   },
                   complete: function() {
