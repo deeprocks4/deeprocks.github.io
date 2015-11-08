@@ -117,7 +117,7 @@ helpers.roleToLabelElement = function(role, uname) {
     case 'MOD':
       return el.span({className: 'label label-info'}, '☆V.I.P☆');
     case 'OWNER':
-      return el.span({className: 'label label-primary'}, '★Owner★');
+      return el.span({className: 'label label-warning'}, '★Admin★');
     default:
       if ((uname == "chatbot") || (uname == "Chatbot")) {
        return el.span({className: 'label label-success'}, '★Bot★');
