@@ -110,7 +110,7 @@ helpers.calcNumber = function(cond, winProb) {
   }
 };
 
-helpers.roleToLabelElement = function(role) {
+helpers.roleToLabelElement = function(role, uname) {
   switch(role) {
     case 'ADMIN':
       return el.span({className: 'label label-danger'}, 'MP Staff');
@@ -119,7 +119,11 @@ helpers.roleToLabelElement = function(role) {
     case 'OWNER':
       return el.span({className: 'label label-primary'}, '★Owner★');
     default:
-      return el.span({className: 'label label-primary'}, '☆');
+      if (uname == "chatbot"){
+       return el.span({className: 'label label-success'}, '★Bot★');
+      } else {
+       return el.span({className: 'label label-primary'}, '☆');
+      }
   }
 };
 
@@ -1221,7 +1225,7 @@ var ChatUserList = React.createClass({
                 {
                   key: u.uname
                 },
-                helpers.roleToLabelElement(u.role),
+                helpers.roleToLabelElement(u.role, u.uname),
                 ' ' + u.uname
               );
             })
@@ -1296,7 +1300,7 @@ var ChatBox = React.createClass({
                   helpers.formatDateToTime(m.created_at),
                   ' '
                 ),
-                m.user ? helpers.roleToLabelElement(m.user.role) : '',
+                m.user ? helpers.roleToLabelElement(m.user.role, m.user.uname) : '',
                 m.user ? ' ' : '',
                 el.code(
                   null,
