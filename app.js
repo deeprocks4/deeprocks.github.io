@@ -1330,7 +1330,7 @@ var ChatBox = React.createClass({
           className: 'text-right text-muted',
           style: { marginTop: '-15px' }
         },
-        'Type !help for commands. Users online: ' + Object.keys(chatStore.state.userList).length + ' ',
+        'Type !help for chatbot commands. Users online: ' + Object.keys(chatStore.state.userList).length + ' ',
         // Show/Hide userlist button
         el.button(
           {
