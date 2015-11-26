@@ -512,8 +512,8 @@ var chatStore = new Store('chat', {
 var betStore = new Store('bet', {
   nextHash: undefined,
   wager: {
-    str: '0.000001',
-    num: 0.000001,
+    str: '0.00000001',
+    num: 0.00000001,
     error: undefined
   },
   multiplier: {
@@ -523,8 +523,8 @@ var betStore = new Store('bet', {
   },
   hotkeysEnabled: false,
   automaticWager: {
-      str: '0.000001',
-      num: 0.000001,
+      str: '0.00000001',
+      num: 0.00000001,
       error: undefined
   },
   automaticMultiplierWager: {
@@ -587,7 +587,7 @@ var betStore = new Store('bet', {
 
     // Ensure wagerString is a number
     //if (isNaN(n) || /[^\d]/.test(n.toString())) {
-	if (n < 0.000001) {
+	if (n < 0.00000001) {
       self.state.wager.error = 'INVALID_WAGER';
     // Ensure user can afford balance
     } else if (n / 0.00000001 > worldStore.state.user.balance) {
@@ -607,7 +607,7 @@ var betStore = new Store('bet', {
         }
       }
     }
-	if (isNumeric(n) && (n < 0.000001)){
+	if (isNumeric(n) && (n < 0.00000001)){
 		self.state.wager.error = 'INVALID_WAGER';
 	} else {
 	    self.state.wager.error = null; // z
