@@ -2738,7 +2738,7 @@ var BetRow = React.createClass({
       // Wager
       el.td(
         null,
-        helpers.round10(bet.wager*0.00000001, -8),
+        helpers.round10(bet.wager*0.00000001, -9),
         ' BTC'
       ),
       // Target
