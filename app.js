@@ -537,8 +537,8 @@ var betStore = new Store('bet', {
     error: undefined
   },
   clientSeed: {
-    str: '6969',
-    num: 6969,
+    str: '(Math.floor(Math.random() * 10000) + 1)',
+    num: (Math.floor(Math.random() * 10000) + 1),
     error:void 0
   },
   showAutomaticRoll: false,
