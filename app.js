@@ -6,7 +6,7 @@ var config = {
   // - Your app's id on moneypot.com
   app_id: 497,                             // <----------------------------- EDIT ME!
   // - Displayed in the navbar
-  app_name: '★Invest Dice★฿ ~ 1.0% House edge' ,
+  app_name: '★Invest Dice★฿ ~ 2.0% House edge' ,
   // - For your faucet to work, you must register your site at Recaptcha
   // - https://www.google.com/recaptcha/intro/index.html
   recaptcha_sitekey: '6LfaxAsTAAAAAB-08wFZ6KVZQ9ez_wS7anE0wa1D',  // <----- EDIT ME!
@@ -21,8 +21,8 @@ var config = {
   force_https_redirect: !isRunningLocally(),
   // - Configure the house edge (default is 1%)
   //   Must be between 0.0 (0%) and 1.0 (100%)
-  house_edge: 0.015,
-  chat_buffer_size: 50,
+  house_edge: 0.02,
+  chat_buffer_size: 25,
   // - The amount of bets to show on screen in each tab
   bet_buffer_size: 25
 };
@@ -113,7 +113,7 @@ helpers.calcNumber = function(cond, winProb) {
 helpers.roleToLabelElement = function(role, uname) {
   switch(role) {
     case 'ADMIN':
-      return el.span({className: 'label label-danger'}, 'MP Staff');
+      return el.span({className: 'label label-danger'}, 'MP');
     case 'MOD':
       return el.span({className: 'label label-info'}, '☆V.I.P☆');
     case 'OWNER':
