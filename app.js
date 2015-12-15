@@ -1509,6 +1509,7 @@ var BetBoxMultiplier = React.createClass({
             value: betStore.state.multiplier.str,
             className: 'form-control input-lg',
             onChange: this._onMultiplierChange,
+            onClick: this._onMultiplierChange,
             disabled: !!worldStore.state.isLoading
           }
         ),
@@ -1589,6 +1590,7 @@ var BetBoxWager = React.createClass({
           className: 'form-control input-lg',
           style: style1,
           onChange: this._onWagerChange,
+          onClick: this._onWagerChange,
           disabled: !!worldStore.state.isLoading,
           placeholder: 'BTC'
         }
